@@ -31,7 +31,7 @@
 
         <x-ts-toast />
 
-        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
+        <div class="max-h-full min-h-screen bg-opacity-75 bg-neutral-400 dark:bg-gray-900">
             @livewire('navigation-menu')
             <!-- Page Content -->
             <main>

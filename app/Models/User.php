@@ -3,12 +3,15 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Casts\UpperCase;
+use Laravel\Sanctum\HasApiTokens;
+use Laravel\Jetstream\HasProfilePhoto;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
-use Laravel\Jetstream\HasProfilePhoto;
-use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class User extends Authenticatable
 {
@@ -27,6 +30,12 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'ultimo_acesso_at',
+        'cpf',
+        'matricula',
+        'data_nascimento',
+        'escola_id',
+        'cargo_id',
     ];
 
     /**
@@ -59,7 +68,65 @@ class User extends Authenticatable
     {
         return [
             'email_verified_at' => 'datetime',
-            'password' => 'hashed',
+            'name'      => UpperCase::class,
+            'password'  => 'hashed',
+            'escola_id' => 'integer',
+            'cargo_id'  => 'integer',
         ];
+    }
+
+    public function escola(): BelongsTo
+    {
+        return $this->belongsTo(Escola::class);
+    }
+
+    public function roles(): BelongsToMany
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
+    public function cargo(): BelongsTo
+    {
+        return $this->belongsTo(Cargo::class);
+    }
+
+    public function scopePesquisa($query, $pesquisa)
+    {
+        if ($pesquisa === '') {
+            return;
+        }
+
+        return $query
+            ->orWhere('id', 'LIKE', "%{$pesquisa}%")
+            ->orWhere('name', 'LIKE', "%{$pesquisa}%")
+            ->orWhere('escola_id', 'LIKE', "%{$pesquisa}%")
+            ->orWhere('email', 'LIKE', "%{$pesquisa}%");
+    }
+
+    public function scopeName($query, $name)
+    {
+        if ($name === null or $name === '') {
+            return;
+        }
+
+        return $query->whereName($name);
+    }
+
+    public function scopeEmail($query, $email)
+    {
+        if ($email === null or $email === '') {
+            return;
+        }
+
+        return $query->whereEmail($email);
+    }
+
+    public function scopeEscola_id($query, $escola_id)
+    {
+        if (!empty($escola_id)) {
+            $query->where('escola_id', $escola_id);
+        }
+
+        return $query;
     }
 }

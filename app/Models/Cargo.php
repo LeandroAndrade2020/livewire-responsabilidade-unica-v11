@@ -5,26 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Escola extends Model
+class Cargo extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     protected $fillable = [
         'name',
-        'regiao',
-        'bairro',
-        'endereco',
-        'telefone',
-        'status',
     ];
 
     public function users(): HasMany
     {
-        return $this->hasMany(User::class, 'escola_id');
-    }
-    public function estagiarios(): HasMany
-    {
-        return $this->hasMany(Estagiario::class);
+        return $this->hasMany(User::class);
     }
 }

@@ -11,14 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('escolas', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->smallInteger('status')->default(1);
-            $table->string('bairro');
-            $table->string('regiao');
-            $table->string('endereco');
-            $table->string('telefone');
+        Schema::create('permission_roles', function (Blueprint $table) {
+            $table->foreignId('role_id')->references('id')->on('roles')->cascadeOnDelete();
+            $table->foreignId('permission_id')->references('id')->on('permissions')->cascadeOnDelete();
             $table->timestamps();
         });
     }
@@ -28,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('escolas');
+        Schema::dropIfExists('permission_roles');
     }
 };

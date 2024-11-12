@@ -23,8 +23,5 @@ class Escola extends Model
     {
         return $this->hasMany(User::class, 'escola_id');
     }
-    public function estagiarios(): HasMany
-    {
-        return $this->hasMany(Estagiario::class);
-    }
+
 }

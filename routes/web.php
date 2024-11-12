@@ -1,8 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PdfController;
-use App\Livewire\{Escola, Estagiario, User};
+use App\Livewire\{Cargo, Escola, User};
 
 Route::get('/', function () {
     return view('welcome');
@@ -21,7 +20,5 @@ Route::middleware([
 
     Route::get('user', User\Index::class)->name('user.index');
     Route::get('escola', Escola\Index::class)->name('escola.index');
-    Route::get('estagiario', Estagiario\Index::class)->name('estagiario.index');
-
-    Route::get('pdf-view/{estagiario}', PdfController::class)->name('pdf.view');
+    Route::get('cargo', Cargo\Index::class)->name('cargo.index');
 });

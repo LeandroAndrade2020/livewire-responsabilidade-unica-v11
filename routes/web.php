@@ -1,7 +1,9 @@
 <?php
 
+use App\Livewire\Cargo;
+use App\Livewire\Escola;
+use App\Livewire\User;
 use Illuminate\Support\Facades\Route;
-use App\Livewire\{Cargo, Escola, User};
 
 Route::get('/', function () {
     return view('welcome');

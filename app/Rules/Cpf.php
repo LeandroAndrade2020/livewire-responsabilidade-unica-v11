@@ -14,7 +14,7 @@ class Cpf implements ValidationRule
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        if(!preg_match('/^(\d{3}\.?\d{3}\.?\d{3}-?\d{2})$/', $value)) {
+        if (! preg_match('/^(\d{3}\.?\d{3}\.?\d{3}-?\d{2})$/', $value)) {
             $fail('O campo $attribute não é válido 1');
         }
 

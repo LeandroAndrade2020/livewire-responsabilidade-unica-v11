@@ -3,9 +3,7 @@
 namespace App\Livewire\Escola;
 
 use App\Livewire\Forms\EscolaForm;
-use Illuminate\Support\Facades\{Gate, Log};
 use Livewire\Component;
-use Symfony\Component\HttpFoundation\Response;
 use TallStackUi\Traits\Interactions;
 
 class Create extends Component
@@ -33,8 +31,6 @@ class Create extends Component
 
     public function render()
     {
-        abort_if(Gate::denies('diretor_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
         return view('livewire.escola.create');
     }
 }

@@ -5,9 +5,7 @@ namespace App\Livewire\User;
 use App\Models\User;
 use Livewire\Component;
 use App\Livewire\Forms\UserForm;
-use Illuminate\Support\Facades\Gate;
 use TallStackUi\Traits\Interactions;
-use Symfony\Component\HttpFoundation\Response;
 
 class Create extends Component
 {
@@ -80,8 +78,6 @@ class Create extends Component
 
     public function render()
     {
-        abort_if(Gate::denies('diretor_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
         return view('livewire.user.create');
     }
 }

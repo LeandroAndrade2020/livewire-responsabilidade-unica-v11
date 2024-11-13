@@ -3,10 +3,8 @@
 namespace App\Livewire\Escola;
 
 use App\Models\Escola;
-use Illuminate\Support\Facades\Gate;
 use Livewire\Attributes\{Locked, On};
 use Livewire\Component;
-use Symfony\Component\HttpFoundation\Response;
 use TallStackUi\Traits\Interactions;
 
 class Delete extends Component

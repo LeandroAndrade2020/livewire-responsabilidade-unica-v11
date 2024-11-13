@@ -23,4 +23,17 @@ class Escola extends Model
     {
         return $this->hasMany(User::class, 'escola_id');
     }
+
+    public function scopePesquisa($query, $pesquisa)
+    {
+        if ($pesquisa === '') {
+            return;
+        }
+
+        return $query->whereAny(
+            ['name', 'endereco', 'bairro', 'regiao', 'telefone'],
+            'LIKE',
+            "%{$pesquisa}%"
+        );
+    }
 }

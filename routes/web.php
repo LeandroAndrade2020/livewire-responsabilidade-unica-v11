@@ -22,5 +22,5 @@ Route::middleware([
 
     Route::get('user', User\Index::class)->name('user.index');
     Route::get('escola', Escola\Index::class)->name('escola.index');
-    Route::get('cargo', Cargo\Index::class)->name('cargo.index');
+
 });

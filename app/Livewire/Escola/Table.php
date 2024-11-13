@@ -19,9 +19,9 @@ class Table extends Component
 
     public $paginate = 5;
 
-    public $sortBy = 'escolas.name';
+    public $sortBy = 'escolas.updated_at';
 
-    public $sortDirection = 'asc';
+    public $sortDirection = 'desc';
 
     #[Url]
     public string $search = '';
